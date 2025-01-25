@@ -6,20 +6,21 @@ import * as Sentry from "@sentry/nextjs";
 const BASE_URL = 'https://test.couchconcerts.com';
 
 function Home() {
-    const getVersionApi = () => {
+    const getVersionApi = async () => {
         try {
-            const response = axios.get(`${BASE_URL}/version/ap`);
+            await axios.get(`${BASE_URL}/version/ap`);
         } catch (error) {
             console.log('inside catch of getVersionApi', error);
             Sentry.captureException(error);
         }
     }
 
-    const getEventByIdApi = () => {
+    const getEventByIdApi = async () => {
         try {
-            // const response = axios.get(`${BASE_URL}/events?eventId=678ca65331d16b6cdb7eab71`);   // valid
-            const response = axios.get(`${BASE_URL}/events`);   // invalid
-            // const response = axios.get(`${BASE_URL}/events?eventId=678ca65331d16b6cdb7eab7`);   // invalid
+            // await axios.get(`${BASE_URL}/events?eventId=678ca65331d16b6cdb7eab71`);   // valid
+            // @typescript-eslint/no-unused-vars
+            await axios.get(`${BASE_URL}/events`);   // invalid
+            // await axios.get(`${BASE_URL}/events?eventId=678ca65331d16b6cdb7eab7`);   // invalid
         } catch (error) {
             console.log('inside catch of getEventByIdApi', error);
             Sentry.captureException(error);
